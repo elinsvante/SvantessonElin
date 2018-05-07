@@ -12,7 +12,7 @@
     <link rel = "stylesheet" href = "assets/css/main.css">
 <body>
     <div id="wrapper">
-        <h1 id="rubrik"> Thank you for your comment! </h1>
+        <h1 id="rubrik"> Thank you for your comments! </h1>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" name="myForm" onsubmit="return validateForm()" method="POST">
 
                 Name:<br>
