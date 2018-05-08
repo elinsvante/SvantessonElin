@@ -53,12 +53,12 @@ $name_error = $email_error = $password_error = "";
             $unique_salt = unique_salt();
             $hash = sha1($unique_salt . $Password);
 
-            $insert = "INSERT INTO Users (Salt,Email,Password) VALUES ('".$unique_salt."', '".$email."', '".$hash."');";
+            $insert = "INSERT INTO Users (Salt,Email,Password,Name) VALUES ('".$unique_salt."', '".$email."', '".$hash."', '".$name."');";
             $connection->query($insert);
 
             $name = $email = $password = "";
 
-            header ("Refresh : 10;  URL = registrationDone.php" );
+            header ("Location: registrationDone.php" );
 
             }
             

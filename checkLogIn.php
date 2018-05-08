@@ -40,34 +40,48 @@ $name_error = $email_error = $password_error = "";
 
             else 
             {
-                                     
+
+            //hämta salt från databasen       
             $saltFromDatabase = "SELECT Salt FROM Users WHERE Email = '$Email'";
             $result = $connection->query($saltFromDatabase); 
 
-            $row = mysqli_fetch_array($result);
+            while ($row = $result->fetch_row()){
+                $Salt = $row[0];
+            }
 
-            $Salt = $row[1];
+            //hasha salt och lösenord
+            $hash = sha1($Salt . $Password);     
 
-            $hash = sha1($Salt . $Password);       
-
+            //hämta hash från databasen
             $sql = "SELECT Password FROM Users WHERE Email = '$Email'";
             $data = $connection->query($sql);
 
-                if($hash == $data)
-                {
-                    session_start(); 
-                    $_SESSION['UserID'] = $data;
-                    $name = $email = $password = "";
-                    header ("Refresh : 0.1;  URL = index.php");
-                }
-                else 
-                {
-                    $password_error = "Wrong password!";
-                }
+            while ($row = $data-> fetch_row()){
+                $Datan = $row[0];
+            }
+
+            //om dem är lika
+            if($hash == $Datan)
+            {
+            $name = "SELECT Name FROM Users WHERE Email = '$Email' AND Password = '$Datan'";
+            $Name = $connection->query($name);
+
+            while ($row = $Name-> fetch_row()){
+                $Data = $row[0];
+            }
+            session_start();
+            $_SESSION ['User'] = $Data;
+            header ("Location: index.php"); 
+            $name = $email = $password = "";          
+            }
+            else 
+            {
+            $password_error = "Wrong password!";
+            }
 
             }
                           
-            }
+        }
         
     }
 ?>

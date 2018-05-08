@@ -1,6 +1,13 @@
 <?php
+    
     include_once 'dbh.php';
     include_once 'saveMessage.php';
+    
+    session_start();
+    if(!isset($_SESSION['User'])) 
+    {
+    header("Location: login.php");
+    }
 
     $sql = "SELECT * FROM Messages;";
     $result = $connection->query($sql);
@@ -11,8 +18,14 @@
     <title> Comments </title>
     <link rel = "stylesheet" href = "assets/css/main.css">
 <body>
+<div id = "header">
+<h2> Welcome <?php echo $_SESSION['User']; ?> </h2>
+<p1> You are now logged in </p1>
+<br><br>
+<a href = logout.php> <input type=submit name=logout value=Logout></a>
+</div>
     <div id="wrapper">
-        <h1 id="rubrik"> Thank you for your comments! </h1>
+        <h1 id="rubrik"> Leave a comment! </h1>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" name="myForm" onsubmit="return validateForm()" method="POST">
 
                 Name:<br>
@@ -34,7 +47,7 @@
         </form>
 
     <hr>
-    <h2>Read all comments below.</h2>
+    <h2>All comments</h2>
     <hr>
     <div id = "wrapper2">
     <?php
@@ -45,7 +58,6 @@
         }
     ?>
     </div>
-
 
 </body>
 </head>

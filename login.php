@@ -1,7 +1,6 @@
 <?php
     include_once 'dbh.php';
     include_once 'checkLogIn.php';
-
 ?>
 
 <html>
@@ -26,6 +25,7 @@
                 <input type="submit" name="submit" id="submit" value="Log in">
         </form>
 
+<a href = 'register.php'><p1> Not registred? </p1> </a>
     </div>
 </body>
 </head>
