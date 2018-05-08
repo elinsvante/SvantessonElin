@@ -15,7 +15,7 @@
 
 <html>
 <head>
-    <title> Commentsss </title>
+    <title> Comments </title>
     <link rel = "stylesheet" href = "assets/css/main.css">
 <body>
 <div id = "header">
